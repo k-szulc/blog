@@ -10,6 +10,7 @@ urlpatterns = [
 
     #Home
     url(r'^$', views.index, name='index'),
-    url(r'^post/(?P<post_id>\d+)/$', views.post, name='post')
+    url(r'^post/(?P<post_id>\d+)/$', views.post, name='post'),
+    url(r'^new_post/$', views.new_post, name='new_post')
 
 ]
