@@ -1,9 +1,16 @@
-{% extends "blogs/base.html" %}
+<nav>
+  <a href="{% url 'blogs:index' %}">Blog</a>
+  <a href="{% url 'blogs:new_post' %}">Add a post</a>
+  <a href="{% url 'blogs:edit_post' post.id %}">Edit</a>
+</nav>
 
 {% block content %}
+
 <p><strong>{{ post.title }}</strong></p>
 <br>
 <p>{{ post.text|linebreaks }} <p>
+<br>
+
 
 
 
