@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 
 from .models import BlogPost
 from .forms import BlogPostForm
@@ -21,6 +22,7 @@ def post(request, post_id):
     context = {'post': post}
     return render(request, 'blogs/post.html', context)
 
+@login_required
 def new_post(request):
     """Create new post"""
 
