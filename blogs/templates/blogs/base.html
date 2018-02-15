@@ -1,8 +1,8 @@
 <nav>
   <a href="{% url 'blogs:index' %}">Blog</a>
-  <a href="{% url 'blogs:new_post' %}">Add a post</a>
   {% if user.is_authenticated %}
     Hello, {{ user.username }}.
+    <a href="{% url 'blogs:new_post' %}">Add a post</a>
     <a href="{% url 'users:logout' %}">log out</a>
   {% else %}
     <a href="{% url 'users:register' %}"> register</a> -

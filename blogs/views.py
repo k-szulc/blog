@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
@@ -15,11 +15,12 @@ def index(request):
     context = {'posts' : posts}
     return render(request, 'blogs/index.html', context)
 
+
 def post(request, post_id):
     """Page for post(for comments, editing etc)"""
 
     post = BlogPost.objects.get(id=post_id)
-    context = {'post': post}
+    context = {'post': post }
     return render(request, 'blogs/post.html', context)
 
 @login_required
@@ -33,16 +34,21 @@ def new_post(request):
         #POST
         form = BlogPostForm(request.POST)
         if form.is_valid():
-            form.save()
+            new_post = form.save(commit=False)
+            new_post.owner = request.user
+            new_post.save()
             return HttpResponseRedirect(reverse('blogs:index'))
 
     context = {'form': form}
     return render(request, 'blogs/new_post.html', context)
 
+@login_required
 def edit_post(request,post_id):
     """Edit exisiting post"""
 
     post = BlogPost.objects.get(id=post_id)
+    if post.owner != request.user:
+        raise Http404
     #if GET, render post
     if request.method != 'POST':
         form = BlogPostForm(instance=post)

@@ -6,7 +6,7 @@
   <ul>
     {% for post in posts %}
       <br>
-      <li><a href="{% url 'blogs:post' post.id %}"> {{ post.title }} </a> posted {{ post.date_added|date:'M d, Y H:i' }} </li>
+      <li><a href="{% url 'blogs:post' post.id %}"> {{ post.title }} </a> posted {{ post.date_added|date:'M d, Y H:i' }}  by {{ post.owner }}</li>
       <br>
       {{ post.text|truncatechars:1000 }}
       <br>
