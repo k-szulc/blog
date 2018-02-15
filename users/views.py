@@ -23,6 +23,8 @@ def register(request):
 
         if form.is_valid():
             new_user = form.save()
+            new_user.groups.add(1)
+            new_user.save()
 
             authenticated_user = authenticate(username=new_user.username,
                 password=request.POST['password1'])
