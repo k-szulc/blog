@@ -63,7 +63,7 @@ def edit_post(request,post_id):
     else:
         form = BlogPostForm(instance=post, data=request.POST)
         if form.is_valid():
-            if 'save' in request.POST:
+            if 'submit' in request.POST:
                 form.save()
                 return HttpResponseRedirect(reverse('blogs:post', args=[post.id]))
             if 'delete' in request.POST:
