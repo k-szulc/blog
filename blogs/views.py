@@ -1,10 +1,17 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, Http404
 from django.urls import reverse
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
+
+from django.contrib.auth.models import User, Group
 
 from .models import BlogPost
 from .forms import BlogPostForm
+
+#Functions
+def is_member(user):
+    return user.groups.filter(name='Writers').exists()
+
 
 # Create your views here.
 def index(request):
@@ -24,6 +31,7 @@ def post(request, post_id):
     return render(request, 'blogs/post.html', context)
 
 @login_required
+@user_passes_test(is_member)
 def new_post(request):
     """Create new post"""
 

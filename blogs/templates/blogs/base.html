@@ -2,7 +2,9 @@
   <a href="{% url 'blogs:index' %}">Blog</a>
   {% if user.is_authenticated %}
     Hello, {{ user.username }}.
-    <a href="{% url 'blogs:new_post' %}">Add a post</a>
+    {% ifequal user.groups.all.0.name "Writers" %}
+      <a href="{% url 'blogs:new_post' %}">Add a post</a>
+    {% endifequal %}
     <a href="{% url 'users:logout' %}">log out</a>
   {% else %}
     <a href="{% url 'users:register' %}"> register</a> -
