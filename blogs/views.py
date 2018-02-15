@@ -55,8 +55,12 @@ def edit_post(request,post_id):
     else:
         form = BlogPostForm(instance=post, data=request.POST)
         if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(reverse('blogs:post', args=[post.id]))
+            if 'save' in request.POST:
+                form.save()
+                return HttpResponseRedirect(reverse('blogs:post', args=[post.id]))
+            if 'delete' in request.POST:
+                post.delete()
+                return HttpResponseRedirect(reverse('blogs:index'))
 
     context = {'post': post, 'form': form}
     return render(request, 'blogs/edit_post.html', context)
