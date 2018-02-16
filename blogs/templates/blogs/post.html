@@ -1,20 +1,20 @@
 {% extends "blogs/base.html" %}
 
-
+{% block header %}
+  <div class='jumbotron'>
+    <h1>{{ post.title }}</h1>
+  </div>
+{% endblock header %}
 
 {% block content %}
 
-<p><strong>{{ post.title }}</strong></p>
+
 {{ post.date_added|date:'M d, Y H:i' }}  by {{ post.owner }}
+{% if post.owner == user %}
+<small><a href="{% url 'blogs:edit_post' post.id %}">Edit</a></small>
 <br><br>
 <p>{{ post.text|linebreaks }} <p>
 <br>
-{% if post.owner == user %}
-<a href="{% url 'blogs:edit_post' post.id %}">Edit</a>
+
 {% endif %}
-
-
-
-
-
 {% endblock content %}

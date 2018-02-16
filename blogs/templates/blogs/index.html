@@ -1,19 +1,29 @@
 {% extends "blogs/base.html" %}
 
-{% block content %}
-  <p>Posts</p>
+{% block header %}
+  <div class='jumbotron'>
+    <h1>Blog posts</h1>
+  </div>
+{% endblock header %}
 
-  <ul>
+
+{% block content %}
     {% for post in posts %}
-      <br>
-      <li><a href="{% url 'blogs:post' post.id %}"> {{ post.title }} </a> posted {{ post.date_added|date:'M d, Y H:i' }}  by {{ post.owner }}</li>
-      <br>
-      {{ post.text|truncatechars:1000 }}
-      <br>
-      <br>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h2>
+            <a href="{% url 'blogs:post' post.id %}"> {{ post.title }} </a>
+              <small>posted {{ post.date_added|date:'M d, Y H:i' }}
+              by {{ post.owner }}</small>
+          </h2>
+        </div>
+        <div class="panel-body">
+          {{ post.text|truncatechars:1000 }}
+        </div>
+      </div> <!-- panel -->
+
     {% empty %}
-      <li>No posts ;( </li>
+      No posts ;(
     {% endfor %}
-  </ul>
 
 {% endblock content %}
