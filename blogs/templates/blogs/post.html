@@ -12,9 +12,10 @@
 {{ post.date_added|date:'M d, Y H:i' }}  by {{ post.owner }}
 {% if post.owner == user %}
 <small><a href="{% url 'blogs:edit_post' post.id %}">Edit</a></small>
+{% endif %}
 <br><br>
 <p>{{ post.text|linebreaks }} <p>
 <br>
 
-{% endif %}
+
 {% endblock content %}
