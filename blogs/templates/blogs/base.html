@@ -1,4 +1,5 @@
 {% load bootstrap3 %}
+{% load cookielaw_tags %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -11,6 +12,9 @@
 
     {% bootstrap_css %}
     {% bootstrap_javascript %}
+    {% load staticfiles %}
+    <script src="{% static "cookielaw/js/cookielaw.js" %}"></script>
+     {% cookielaw_banner %}
   </head>
 
   <body>
@@ -61,5 +65,7 @@
         {% block content %}{% endblock content %}
       </div>
     </div> <!-- /container -->
+
+
   </body>
 </html>

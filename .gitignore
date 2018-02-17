@@ -9,3 +9,4 @@ pip-selfcheck.json
 .env
 */migrations/*
 *.sqlite3
+static
