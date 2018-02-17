@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import UserCreationForm
 
+from .forms import SignupForm
 
 # Create your views here.
 
@@ -16,10 +17,10 @@ def register(request):
     """New user"""
     if request.method != 'POST':
         #Display the form
-        form = UserCreationForm()
+        form = SignupForm()
     else:
         #Process the form
-        form = UserCreationForm(data=request.POST)
+        form = SignupForm(data=request.POST)
 
         if form.is_valid():
             new_user = form.save()
