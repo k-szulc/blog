@@ -128,6 +128,12 @@ STATIC_URL = '/static/'
 
 LOGIN_URL = '/users/login/'
 
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'sqnblog.superuser@gmail.com'
+EMAIL_HOST_PASSWORD = 'Katiusza@#23'
+EMAIL_PORT = 587
+
 BOOTSTRAP3 = {
     'include_jquery': True,
     }
